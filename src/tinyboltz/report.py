@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+import csv
 import html
 import json
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
 from pathlib import Path
 
 from .boltzio import load_manifest
@@ -233,6 +234,43 @@ def write_html_report(run_dir: str | Path, output_path: str | Path) -> None:
 """
     output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(html_doc, encoding="utf-8")
+
+
+def write_json_results(run_dir: str | Path, output_path: str | Path) -> None:
+    base = Path(run_dir)
+    output = Path(output_path)
+    manifest = _optional_manifest(base)
+    payload = {
+        "run_dir": str(base),
+        "target": manifest.get("target", {}),
+        "accepted_count": manifest.get("accepted_count", 0),
+        "rejected_count": manifest.get("rejected_count", 0),
+        "results": [asdict(result) for result in collect_affinity_results(base)],
+    }
+    output.parent.mkdir(parents=True, exist_ok=True)
+    output.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+
+
+def write_csv_results(run_dir: str | Path, output_path: str | Path) -> None:
+    output = Path(output_path)
+    output.parent.mkdir(parents=True, exist_ok=True)
+    fieldnames = [
+        "rank",
+        "job_id",
+        "ligand_name",
+        "smiles",
+        "affinity_pred_value",
+        "affinity_probability_binary",
+        "structure_path",
+        "source_json",
+    ]
+    with output.open("w", newline="", encoding="utf-8") as handle:
+        writer = csv.DictWriter(handle, fieldnames=fieldnames)
+        writer.writeheader()
+        for rank, result in enumerate(collect_affinity_results(run_dir), start=1):
+            row = asdict(result)
+            row["rank"] = rank
+            writer.writerow(row)
 
 
 def render_row(index: int, result: AffinityResult) -> str:

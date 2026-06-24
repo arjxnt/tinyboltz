@@ -38,6 +38,9 @@ flowchart LR
 | `tinyboltz.packs` | Neglected-disease starter packs. |
 | `tinyboltz.diagnostics` | Local environment readiness checks. |
 | `tinyboltz.budget` | GPU-hour planning. |
+| `tinyboltz.profiles` | Dependency-free operational profile parsing. |
+| `tinyboltz.validate` | Manifest and YAML consistency checks. |
+| `tinyboltz.plan` | Markdown execution runbook generation. |
 
 ## Execution Boundary
 
@@ -48,4 +51,3 @@ tinyboltz run --prepared runs/my-screen --execute
 ```
 
 Everything else prepares, validates, reports, or plans.
-

@@ -46,10 +46,43 @@ def main() -> int:
         )
 
         run([PYTHON, "-m", "tinyboltz", "status", "--run", str(run_dir)], env=env)
+        run([PYTHON, "-m", "tinyboltz", "validate", "--run", str(run_dir)], env=env)
         run([PYTHON, "-m", "tinyboltz", "budget", "--run", str(run_dir)], env=env)
         run([PYTHON, "-m", "tinyboltz", "run", "--prepared", str(run_dir), "--remaining-only"], env=env)
-        run([PYTHON, "-m", "tinyboltz", "report", "--run", str(run_dir), "--out", str(run_dir / "report.html")], env=env)
+        run(
+            [
+                PYTHON,
+                "-m",
+                "tinyboltz",
+                "report",
+                "--run",
+                str(run_dir),
+                "--out",
+                str(run_dir / "report.html"),
+                "--csv",
+                str(run_dir / "results.csv"),
+                "--json",
+                str(run_dir / "results.json"),
+            ],
+            env=env,
+        )
+        run(
+            [
+                PYTHON,
+                "-m",
+                "tinyboltz",
+                "plan",
+                "--run",
+                str(run_dir),
+                "--out",
+                str(run_dir / "RUNBOOK.md"),
+            ],
+            env=env,
+        )
         assert "0.91" in (run_dir / "report.html").read_text(encoding="utf-8")
+        assert (run_dir / "results.csv").exists()
+        assert (run_dir / "results.json").exists()
+        assert "Estimated GPU hours" in (run_dir / "RUNBOOK.md").read_text(encoding="utf-8")
         print("tinyboltz smoke passed")
         return 0
     finally:

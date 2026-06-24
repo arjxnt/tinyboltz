@@ -11,6 +11,22 @@ requires-python = ">=3.10"
 license = "MIT"
 authors = [{ name = "TinyBoltz contributors" }]
 dependencies = []
+keywords = ["boltz2", "drug-discovery", "bioinformatics", "computational-biology", "huggingface"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+
+[project.urls]
+Homepage = "https://github.com/arjxnt/tinyboltz"
+Repository = "https://github.com/arjxnt/tinyboltz"
+Issues = "https://github.com/arjxnt/tinyboltz/issues"
 
 [project.optional-dependencies]
 chem = ["rdkit"]
@@ -23,3 +39,5 @@ tinyboltz = "tinyboltz.cli:main"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 
+[tool.hatch.build.targets.wheel]
+packages = ["src/tinyboltz"]

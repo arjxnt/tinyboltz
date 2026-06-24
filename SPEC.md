@@ -23,10 +23,14 @@ North star: make frontier protein-ligand AI usable by a tiny lab with one GPU an
 - [x] Estimate GPU-hour budgets with `budget`.
 - [x] Include architecture and roadmap docs.
 - [x] Include operational profiles for different compute situations.
+- [x] Make operational profiles affect `screen`, `run`, and `budget`.
+- [x] Validate manifests before GPU execution.
+- [x] Export ranked results as CSV and JSON.
+- [x] Generate markdown runbooks for prepared screens.
 
 ## Next High-Impact Tasks
 
 - [ ] Add calibration plots against public protein-ligand benchmark complexes.
 - [ ] Add a purchasable-compound downloader with vendor-neutral source metadata.
 - [ ] Add embedded 3Dmol.js rendering for top poses.
-- [ ] Add GitHub Actions CI with no-GPU smoke tests.
+- [ ] Add GitHub Actions CI with no-GPU smoke tests once workflow-scoped push is available.

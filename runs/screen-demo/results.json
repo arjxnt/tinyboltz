@@ -1,0 +1,11 @@
+{
+  "run_dir": "runs\\screen-demo",
+  "target": {
+    "target_id": "demo_target",
+    "sequence": "MSEQNNTEMTFQIQRIYTKDISFEAPNAPHVFQKDWQPEVKLDLDTASSQLADDVYEVVLRVTVTAS",
+    "description": "short example target"
+  },
+  "accepted_count": 3,
+  "rejected_count": 2,
+  "results": []
+}

@@ -26,6 +26,9 @@ This repository does not vendor Boltz-2. It prepares and runs jobs for the Huggi
 - Resumes interrupted runs with `--remaining-only`.
 - Checks local readiness with `doctor`.
 - Estimates GPU-hours before a run with `budget`.
+- Validates prepared manifests before execution.
+- Exports ranked results as HTML, CSV, and JSON.
+- Writes markdown runbooks for small-lab handoff.
 
 ## Command Surface
 
@@ -35,7 +38,9 @@ This repository does not vendor Boltz-2. It prepares and runs jobs for the Huggi
 | `prepare` | Build Boltz YAML jobs and a manifest. |
 | `run` | Dry-run or execute Boltz. |
 | `status` | Show completed and remaining jobs. |
+| `validate` | Check manifest/YAML consistency before GPU use. |
 | `budget` | Estimate GPU hours before running. |
+| `plan` | Write a markdown execution runbook. |
 | `report` | Build an HTML evidence dashboard. |
 | `fetch-target` | Download a UniProt FASTA target. |
 | `init-pack` | Create a neglected-disease starter pack. |
@@ -95,7 +100,21 @@ tinyboltz run --prepared runs/demo
 Create a report from any available prediction JSON files:
 
 ```bash
-tinyboltz report --run runs/demo --out runs/demo/report.html
+tinyboltz report \
+  --run runs/demo \
+  --out runs/demo/report.html \
+  --csv runs/demo/results.csv \
+  --json runs/demo/results.json
+```
+
+Use an operational profile:
+
+```bash
+tinyboltz screen \
+  --profile configs/profiles/tiny-gpu.yaml \
+  --target examples/targets/demo_target.fasta \
+  --ligands examples/ligands/demo_ligands.smi \
+  --out runs/profile-demo
 ```
 
 ## Run Boltz For Real
@@ -122,10 +141,22 @@ Check progress:
 tinyboltz status --run runs/demo
 ```
 
+Validate the prepared run:
+
+```bash
+tinyboltz validate --run runs/demo
+```
+
 Estimate cost before running:
 
 ```bash
 tinyboltz budget --run runs/demo --minutes-per-job 8 --batch-size 1
+```
+
+Write an execution runbook:
+
+```bash
+tinyboltz plan --run runs/demo --out runs/demo/RUNBOOK.md
 ```
 
 Check the local environment:

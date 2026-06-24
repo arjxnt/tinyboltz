@@ -5,6 +5,7 @@ from tinyboltz.fasta import ProteinTarget
 from tinyboltz.ligands import Ligand, LigandFilterConfig, filter_ligands
 from tinyboltz.runner import build_boltz_command
 from tinyboltz.status import inspect_run
+from tinyboltz.validate import has_errors, validate_run
 
 
 def test_filter_rejects_metals_and_duplicates():
@@ -48,3 +49,13 @@ def test_status_counts_remaining_jobs(tmp_path: Path):
     assert status.accepted_count == 1
     assert status.completed_count == 0
     assert status.remaining_jobs == ["L0001_ethanol"]
+
+
+def test_validate_run_accepts_prepared_manifest(tmp_path: Path):
+    target = ProteinTarget("T", "MSEQNNTEMT")
+    ligand = Ligand("L0001", "CCO", "ethanol", 1)
+    jobs = prepare_jobs(target, [ligand], tmp_path)
+    from tinyboltz.boltzio import write_manifest
+
+    write_manifest(tmp_path / "manifest.json", target, jobs, source_ligands="x.smi", rejected_count=0)
+    assert not has_errors(validate_run(tmp_path))
