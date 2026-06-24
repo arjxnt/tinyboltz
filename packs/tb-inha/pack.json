@@ -1,0 +1,12 @@
+{
+  "pack": {
+    "pack_id": "tb-inha",
+    "disease_area": "tuberculosis",
+    "target_name": "Mycobacterium tuberculosis InhA",
+    "uniprot_accession": "P9WGR1",
+    "why_it_matters": "InhA is a validated tuberculosis drug target connected to isoniazid biology."
+  },
+  "target_fasta": "packs\\tb-inha\\targets\\tb-inha.fasta",
+  "ligands": "packs\\tb-inha\\ligands\\starter_ligands.smi",
+  "note": "Starter ligands are workflow seeds and sanity checks, not medical recommendations."
+}

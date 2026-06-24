@@ -1,0 +1,42 @@
+{
+  "tool": "tinyboltz",
+  "schema_version": 1,
+  "target": {
+    "target_id": "demo_target",
+    "sequence": "MSEQNNTEMTFQIQRIYTKDISFEAPNAPHVFQKDWQPEVKLDLDTASSQLADDVYEVVLRVTVTAS",
+    "description": "short example target"
+  },
+  "source_ligands": "examples\\ligands\\demo_ligands.smi",
+  "accepted_count": 4,
+  "rejected_count": 1,
+  "jobs": [
+    {
+      "job_id": "L0001_aspirin",
+      "ligand_id": "L0001",
+      "ligand_name": "aspirin",
+      "smiles": "CC(=O)OC1=CC=CC=C1C(=O)O",
+      "yaml_path": "runs\\demo\\inputs\\L0001_aspirin.yaml"
+    },
+    {
+      "job_id": "L0002_caffeine",
+      "ligand_id": "L0002",
+      "ligand_name": "caffeine",
+      "smiles": "Cn1cnc2n(C)c(=O)n(C)c(=O)c12",
+      "yaml_path": "runs\\demo\\inputs\\L0002_caffeine.yaml"
+    },
+    {
+      "job_id": "L0003_ethanol",
+      "ligand_id": "L0003",
+      "ligand_name": "ethanol",
+      "smiles": "CCO",
+      "yaml_path": "runs\\demo\\inputs\\L0003_ethanol.yaml"
+    },
+    {
+      "job_id": "L0004_cyclohexane",
+      "ligand_id": "L0004",
+      "ligand_name": "cyclohexane",
+      "smiles": "C1CCCCC1",
+      "yaml_path": "runs\\demo\\inputs\\L0004_cyclohexane.yaml"
+    }
+  ]
+}

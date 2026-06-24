@@ -1,0 +1,15 @@
+profile: tiny-gpu
+description: Conservative local or borrowed-GPU profile.
+boltz:
+  model: boltz2
+  accelerator: gpu
+  use_msa_server: true
+  use_potentials: false
+screen:
+  max_heavy_atoms: 60
+  max_smiles_len: 180
+  batch_size: 1
+budget:
+  minutes_per_job: 10
+  stop_after_gpu_hours: 2
+

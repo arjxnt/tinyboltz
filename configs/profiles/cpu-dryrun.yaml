@@ -1,0 +1,15 @@
+profile: cpu-dryrun
+description: No-GPU planning profile for preparing jobs and reports only.
+boltz:
+  model: boltz2
+  accelerator: cpu
+  use_msa_server: true
+  use_potentials: false
+screen:
+  max_heavy_atoms: 50
+  max_smiles_len: 160
+  batch_size: 1
+budget:
+  minutes_per_job: 60
+  stop_after_gpu_hours: 0
+

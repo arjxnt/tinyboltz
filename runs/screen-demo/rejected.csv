@@ -1,0 +1,3 @@
+source_index,name,smiles,reason
+5,metal_example,[Fe]C1=CC=CC=C1,metal_containing_smiles
+4,cyclohexane,C1CCCCC1,over_limit

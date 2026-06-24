@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TinyBoltz Report</title>
+  <style>
+    :root {
+      --ink: #122025;
+      --muted: #5d7077;
+      --line: #d8e1e5;
+      --panel: #ffffff;
+      --soft: #f5f8f9;
+      --accent: #087f8c;
+      --accent-2: #0f5f6b;
+      --warn: #9a5b00;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: linear-gradient(180deg, #eef6f7 0, #ffffff 340px);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 34px 24px 54px; }
+    header { border-bottom: 1px solid var(--line); padding-bottom: 22px; }
+    h1 { margin: 0 0 8px; font-size: 34px; letter-spacing: 0; }
+    h2 { margin: 30px 0 12px; font-size: 18px; }
+    .subtitle { color: var(--muted); max-width: 860px; line-height: 1.45; }
+    .badge {
+      display: inline-block;
+      border: 1px solid #9ed4d9;
+      color: var(--accent-2);
+      background: #e9f8f9;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      min-height: 94px;
+    }
+    .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    .value { font-size: 24px; font-weight: 700; margin-top: 10px; overflow-wrap: anywhere; }
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .stage {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      border-radius: 8px;
+      padding: 12px;
+      min-height: 82px;
+    }
+    .stage strong { display: block; margin-bottom: 6px; }
+    .stage span { color: var(--muted); font-size: 13px; line-height: 1.35; }
+    .notice {
+      border-left: 4px solid var(--warn);
+      background: #fff8ed;
+      padding: 12px 14px;
+      margin-top: 18px;
+      color: #4d3514;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 10px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    th, td {
+      border-bottom: 1px solid var(--line);
+      padding: 11px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 14px;
+    }
+    th { background: #edf4f5; color: #29464e; font-size: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
+    tr:last-child td { border-bottom: 0; }
+    code { font-family: Consolas, monospace; font-size: 0.92em; }
+    a { color: var(--accent-2); font-weight: 700; }
+    .score { font-weight: 700; color: var(--accent-2); }
+    .empty { text-align: center; color: var(--muted); padding: 36px; }
+    .footnote { color: var(--muted); font-size: 13px; line-height: 1.45; margin-top: 18px; }
+    @media (max-width: 900px) {
+      .cards, .pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      table { display: block; overflow-x: auto; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="badge">TinyBoltz Evidence Bundle</div>
+      <h1>Frontier Protein-Ligand Screen</h1>
+      <p class="subtitle">Target <strong>demo_target</strong> screened through a reproducible Boltz-2 job manifest. This report ranks candidate ligands by available affinity outputs and preserves the files needed for review.</p>
+      <div class="cards">
+        <div class="card"><div class="label">Accepted Jobs</div><div class="value">3</div></div>
+        <div class="card"><div class="label">Completed</div><div class="value">0</div></div>
+        <div class="card"><div class="label">Remaining</div><div class="value">3</div></div>
+        <div class="card"><div class="label">Rejected</div><div class="value">2</div></div>
+        <div class="card"><div class="label">Top Candidate</div><div class="value">pending / pending</div></div>
+      </div>
+      <div class="notice">Research-use prioritization only. These predictions are not therapies, clinical evidence, or validated hits. Wet-lab validation and calibration are required.</div>
+    </header>
+
+    <h2>Screening Pipeline</h2>
+    <section class="pipeline">
+      <div class="stage"><strong>1. Target</strong><span>Protein sequence imported from FASTA or UniProt.</span></div>
+      <div class="stage"><strong>2. Ligands</strong><span>SMILES library parsed from CSV or SMI files.</span></div>
+      <div class="stage"><strong>3. Prefilter</strong><span>Duplicates, metals, oversized molecules, and invalid strings removed.</span></div>
+      <div class="stage"><strong>4. Boltz YAML</strong><span>One affinity-ready complex generated per accepted ligand.</span></div>
+      <div class="stage"><strong>5. GPU Run</strong><span>Boltz execution remains explicit and resumable.</span></div>
+      <div class="stage"><strong>6. Evidence</strong><span>Affinity JSON and structures collected into this report.</span></div>
+    </section>
+
+    <h2>Ranked Candidates</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Job</th>
+          <th>Ligand</th>
+          <th>Binder Probability</th>
+          <th>Affinity Value</th>
+          <th>SMILES</th>
+          <th>Structure</th>
+          <th>Source</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td colspan="8" class="empty">No Boltz affinity JSON files found yet.</td></tr>
+      </tbody>
+    </table>
+    <p class="footnote">Affinity fields are parsed from Boltz output JSON. Binder probability is intended for hit-discovery ranking; affinity values should be interpreted only with domain calibration.</p>
+  </main>
+</body>
+</html>

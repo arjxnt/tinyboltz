@@ -1,0 +1,15 @@
+profile: cheap-cloud
+description: Short rented-GPU session profile with strict budgeting.
+boltz:
+  model: boltz2
+  accelerator: gpu
+  use_msa_server: true
+  use_potentials: true
+screen:
+  max_heavy_atoms: 70
+  max_smiles_len: 200
+  batch_size: 1
+budget:
+  minutes_per_job: 8
+  stop_after_gpu_hours: 4
+

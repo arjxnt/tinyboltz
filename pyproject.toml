@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "tinyboltz"
+version = "0.1.0"
+description = "One-GPU Boltz-2 screening workflow for tiny labs."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "TinyBoltz contributors" }]
+dependencies = []
+
+[project.optional-dependencies]
+chem = ["rdkit"]
+hf = ["huggingface_hub"]
+dev = ["pytest"]
+
+[project.scripts]
+tinyboltz = "tinyboltz.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
